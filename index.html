@@ -1,0 +1,255 @@
+<!--LEGAL-DNA:{"jurisdiction":"US/MN/Baxter","export_tag":"EAR99","spdx":"MIT","artifact_time":1750794494367,"def_pub":"OIN","consent_req":true,"city":"Baxter"}-->
+<!--
+LICENSE.txt
+MIT License.
+
+README.txt
+Ξ SHROOMTOP420™ PROMPT ENGINE v2.0
+- Multifunction, context-expanding prompt builder & audit tool
+- Drop-menus for prompt type, style, recursion, output format, input, destination, QA
+- Brutal, zero-filler, antifragile; infinite expansion hooks
+
+manifest.json
+{
+  "name": "Shroomtop420 Prompt Engine v2.0",
+  "version": "2.0.0",
+  "author": "Shroomtop420®",
+  "offline": true,
+  "license": "MIT"
+}
+
+VERSION.txt
+v2.0.0
+
+promptmeta.json
+{
+  "built_with": "ChatGPT S420-POS v1.0",
+  "prompt": "Provide the entire updated code with all improvements",
+  "date": "2025-06-24T12:35:00-05:00"
+}
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Ξ SHROOMTOP420™ PROMPT ENGINE v2.0</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="theme-color" content="#0a0f14">
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+  <style>
+    body { background: #0a0f14; color: #e9ffe1;}
+    .header { letter-spacing: .02em; }
+    textarea,input,select { background: #181f2b; color: #fff !important; }
+    .out-block { background: #181f2b; border-radius: 1rem; padding: 1rem; margin-top: 1rem; }
+    .prompt { color: #57ffe2; font-weight: bold; }
+    .section-title { color: #fce15b; font-size: 1.15rem; margin-top:.6rem;}
+    .small { color: #a0aec0; font-size: .93rem;}
+    .dropdown-group label { color: #92ffaa; font-size: .95rem; }
+    .dropdown-group select, .dropdown-group input[type="checkbox"] { margin-left: .5rem; margin-bottom:.5rem;}
+    .optionbar { gap:.6rem; }
+    @media(max-width:480px){ .optionbar{flex-direction:column;} }
+  </style>
+</head>
+<body class="flex flex-col items-center min-h-screen px-2 py-8">
+  <h1 class="header text-2xl font-extrabold mb-2 text-green-300">Ξ SHROOMTOP420™ PROMPT ENGINE v2.0</h1>
+  <p class="mb-4 text-base max-w-xl text-center text-green-200">Paste your current prompt/output, or upload/import below.<br>
+    <b>[Generate]</b> creates next-section prompts, expansion logic, audits, and more.<br>
+    Recursively build *infinite* context-aware system prompts.<br>
+    <span class="small">Every dropdown enables brutal customization.</span>
+  </p>
+  <!-- Options Row -->
+  <div class="optionbar flex flex-wrap mb-3 w-full max-w-2xl">
+    <div class="dropdown-group mr-2 mb-2">
+      <label>Expansion Type</label>
+      <select id="expansionType">
+        <option>Section Expansion</option>
+        <option>Audit/Omissions</option>
+        <option>Deployment</option>
+        <option>Adversarial/Red Team</option>
+        <option>Documentation</option>
+        <option>Monetization</option>
+        <option>Legal/Licensing</option>
+        <option>Testing/Validation</option>
+        <option>User Story</option>
+        <option>Risk/Threat Matrix</option>
+        <option>Performance Tuning</option>
+        <option>Compression/Minify</option>
+        <option>Accessibility (a11y)</option>
+        <option>Internationalization (i18n)</option>
+        <option>Custom (edit below)</option>
+      </select>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label>Prompt Style</label>
+      <select id="promptStyle">
+        <option>Brutal/Enterprise</option>
+        <option>Concise/Summary</option>
+        <option>Academic/Formal</option>
+        <option>UX/Conversational</option>
+        <option>Legalese/Contract</option>
+        <option>List/Table/Checklist</option>
+        <option>YAML/JSON/Markdown</option>
+        <option>Chain-of-Thought</option>
+        <option>Tree-of-Thought</option>
+        <option>Q&A/Socratic</option>
+        <option>Delta (Before/After)</option>
+        <option>Step-by-Step</option>
+      </select>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label>Recursion Depth</label>
+      <select id="recursionDepth">
+        <option>1</option>
+        <option>2</option>
+        <option>3</option>
+        <option>Ruthless (5+)</option>
+        <option>Infinite</option>
+        <option>Custom</option>
+      </select>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label>Output Format</label>
+      <select id="outputFormat">
+        <option>Markdown</option>
+        <option>JSON</option>
+        <option>YAML</option>
+        <option>HTML</option>
+        <option>Plaintext</option>
+        <option>Table</option>
+        <option>Code block</option>
+        <option>Side-by-Side</option>
+      </select>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label>Destination</label>
+      <select id="outputDest">
+        <option>Copy to Clipboard</option>
+        <option>Download .txt</option>
+        <option>Export ZIP</option>
+        <option>Send to ChatGPT</option>
+        <option>GitHub Gist</option>
+        <option>Notion Sync</option>
+      </select>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label><input type="checkbox" id="includeQA"> QA/Lint</label>
+    </div>
+    <div class="dropdown-group mr-2 mb-2">
+      <label><input type="checkbox" id="autoRecursion"> Auto-Recursion</label>
+    </div>
+  </div>
+  <!-- Input -->
+  <textarea id="input" class="w-full max-w-2xl h-36 p-3 rounded mb-2" placeholder="Paste your Magic prompt/output or drag a file here..."></textarea>
+  <input type="file" id="fileInput" class="mb-2" accept=".txt,.md,.json,.yml,.yaml">
+  <button id="go" class="px-6 py-2 rounded bg-green-500 hover:bg-green-600 font-bold text-gray-900 transition mb-2">Generate</button>
+  <div id="output" class="w-full max-w-2xl"></div>
+  <script>
+    // Template library
+    const templateMatrix = {
+      "Section Expansion": "Given the content below, generate a new '{SECTION}' section using '{STYLE}' style, for recursion depth '{DEPTH}'. Output in '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Audit/Omissions": "Audit the prompt/output below. Write an explicit 'Omissions & Audit' section using '{STYLE}' style, depth '{DEPTH}'. Output in '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Deployment": "Create a full 'Deployment & Usage' section for the content below. Style: '{STYLE}', Depth: '{DEPTH}', Format: '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Adversarial/Red Team": "Generate a 'Red Team & Adversarial Testing' section for the following, using '{STYLE}', recursion '{DEPTH}', output '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Documentation": "Produce complete documentation for the below using '{STYLE}' style at recursion depth '{DEPTH}'. Format as '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Monetization": "Add a 'Monetization & Licensing' section to the following, using '{STYLE}', depth '{DEPTH}', output '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Legal/Licensing": "Create a legal/license analysis for the below content. Style: '{STYLE}', Recursion: '{DEPTH}', Format: '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Testing/Validation": "Draft a 'Testing & Validation' section for the following, '{STYLE}' style, depth '{DEPTH}', format '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "User Story": "Write a detailed 'User Story/Persona' for the following, in '{STYLE}' style, recursion '{DEPTH}', format '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Risk/Threat Matrix": "Add a full 'Risk & Threat Matrix' section for the content below using '{STYLE}', recursion '{DEPTH}', output '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Performance Tuning": "Insert a 'Performance & Optimization' section for the below. Style: '{STYLE}', Recursion: '{DEPTH}', Format: '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Compression/Minify": "Create a 'Compression & Minification' prompt for the content below, using '{STYLE}', depth '{DEPTH}', format '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Accessibility (a11y)": "Generate an 'Accessibility & Inclusion' prompt for the following, '{STYLE}' style, recursion '{DEPTH}', output '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Internationalization (i18n)": "Draft an 'Internationalization & Localization' prompt for the following, using '{STYLE}', recursion '{DEPTH}', output '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}",
+      "Custom (edit below)": "Based on the input, generate a new section of your choice with style '{STYLE}', recursion depth '{DEPTH}', and format '{FORMAT}'.\n\n[Prompt Content]\n---\n{PASTE_INPUT_HERE}"
+    };
+
+    // Handle file input
+    document.getElementById('fileInput').onchange = function(e) {
+      const file = e.target.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          document.getElementById('input').value = ev.target.result;
+        };
+        reader.readAsText(file);
+      }
+    };
+
+    // Drag-n-drop file handler
+    const textarea = document.getElementById('input');
+    textarea.ondragover = (e) => { e.preventDefault(); textarea.style.border="2px dashed #47ffa3"; };
+    textarea.ondragleave = (e) => { textarea.style.border=""; };
+    textarea.ondrop = (e) => {
+      e.preventDefault(); textarea.style.border="";
+      const file = e.dataTransfer.files[0];
+      if(file) {
+        const reader = new FileReader();
+        reader.onload = function(ev) { textarea.value = ev.target.result; };
+        reader.readAsText(file);
+      }
+    };
+
+    // Main logic
+    document.getElementById('go').onclick = () => {
+      const input = textarea.value.trim();
+      if(!input) {
+        document.getElementById('output').innerHTML = "<div class='out-block'>Paste your Magic prompt/output above first.</div>";
+        return;
+      }
+      // Get dropdowns/options
+      const sec = document.getElementById('expansionType').value;
+      const style = document.getElementById('promptStyle').value;
+      const depth = document.getElementById('recursionDepth').value;
+      const format = document.getElementById('outputFormat').value;
+      const dest = document.getElementById('outputDest').value;
+      const qa = document.getElementById('includeQA').checked;
+      const autoRec = document.getElementById('autoRecursion').checked;
+
+      let tpl = templateMatrix[sec] || templateMatrix["Section Expansion"];
+      let prompt = tpl
+        .replace('{SECTION}', sec)
+        .replace('{STYLE}', style)
+        .replace('{DEPTH}', depth)
+        .replace('{FORMAT}', format)
+        .replace('{PASTE_INPUT_HERE}', input);
+
+      let out = `<div class='out-block'>
+        <div class='section-title'>Prompt:</div>
+        <div class='prompt'>${prompt.replace(/\n/g,"<br>")}</div>
+        <div class='section-title mt-2'>Format: <b>${format}</b> | To: <b>${dest}</b></div>
+      </div>`;
+
+      // Add QA output if checked
+      if(qa) {
+        out += `<div class='out-block'>
+          <div class='section-title'>QA/Lint Analysis:</div>
+          <div class='prompt'>Review this prompt for ambiguity, omissions, logic errors, or excess verbosity. List issues and suggest brutal corrections.<br><br>${prompt.replace(/\n/g,"<br>")}</div>
+        </div>`;
+      }
+
+      // Recursion preview if enabled
+      if(autoRec) {
+        out += `<div class='out-block'>
+          <div class='section-title'>Auto-Recursion Preview:</div>
+          <div class='prompt'>Repeat the above generation recursively to produce new section prompts for every distinct logical branch, dependency, or stakeholder requirement present in the input.</div>
+        </div>`;
+      }
+
+      document.getElementById('output').innerHTML = out;
+
+      // Clipboard/Download/Export (phase 1: clipboard only; expand with ZIP/Notion etc)
+      if(dest === "Copy to Clipboard" && navigator.clipboard) {
+        navigator.clipboard.writeText(prompt);
+      }
+      if(dest === "Download .txt") {
+        const blob = new Blob([prompt], {type:"text/plain"});
+        const a = document.createElement('a');
+        a.href = URL.createObjectURL(blob);
+        a.download = "prompt.txt";
+        a.click();
+      }
+      // Expand: Export ZIP, GitHub Gist, Notion sync, etc. (future module hooks)
+    };
+  </script>
+</body>
+</html>
